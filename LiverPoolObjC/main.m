@@ -13,8 +13,8 @@ BOOL checkAuth(CLLocationManager *manager) {
     if ([CLLocationManager locationServicesEnabled]) {
         NSLog(@"[*] Determining availability of Location Services ...");
         NSLog(@"    [+] Location services is enabled on this device");
-        //[manager startUpdatingLocation];
-        //sleep(1);
+        [manager startUpdatingLocation];
+        sleep(1);
         [manager requestWhenInUseAuthorization];
         [manager requestAlwaysAuthorization];
         
