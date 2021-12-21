@@ -15,6 +15,7 @@ This tool leverages the CoreLocation API on macOS to enumerate Location Services
     - ```./LiverPoolObjC```
     - Enable ```System Preferences > Privacy > Location Services``` for ```LiverPoolObjC```
     - Run ```./LiverPoolObjC``` again
-
+## TODO
+- Get the app to popup the authorization so we don't need to run this twice
 ## References
 - https://developer.apple.com/documentation/corelocation/cllocationmanager
