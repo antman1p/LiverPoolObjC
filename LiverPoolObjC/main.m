@@ -9,8 +9,6 @@
 
 @interface LocationService()
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation *currentLocation;
-
 @end
 
 @implementation LocationService
@@ -20,7 +18,7 @@
     if (self) {
         _locationManager = [CLLocationManager new];
         _locationManager.delegate = self;
-        [_locationManager startUpdatingLocation];
+        //[_locationManager startUpdatingLocation];
         sleep(1);
         [_locationManager requestWhenInUseAuthorization];
         [_locationManager requestAlwaysAuthorization];
