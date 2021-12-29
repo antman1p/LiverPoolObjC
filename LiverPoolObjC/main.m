@@ -5,18 +5,34 @@
 //  Created by Antonio Piazza on 12/16/21.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#import  "liverpoolobjc.h"
 
-BOOL checkAuth(CLLocationManager *manager) {
+@interface LocationService()
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
+
+@end
+
+@implementation LocationService
+
+-(instancetype) init {
+    self = [super init];
+    if (self) {
+        _locationManager = [CLLocationManager new];
+        _locationManager.delegate = self;
+        [_locationManager startUpdatingLocation];
+        sleep(1);
+        [_locationManager requestWhenInUseAuthorization];
+        [_locationManager requestAlwaysAuthorization];
+    }
+    return self;
+}
+
+-(BOOL) checkAuth: (CLLocationManager *) manager {
     BOOL isAuth = NO;
     if ([CLLocationManager locationServicesEnabled]) {
         NSLog(@"[*] Determining availability of Location Services ...");
         NSLog(@"    [+] Location services is enabled on this device");
-        [manager startUpdatingLocation];
-        sleep(1);
-        [manager requestWhenInUseAuthorization];
-        [manager requestAlwaysAuthorization];
         
         NSString *authString;
         switch([manager authorizationStatus]) {
@@ -45,7 +61,7 @@ BOOL checkAuth(CLLocationManager *manager) {
     return isAuth;
 }
 
-void getAccuracy(CLLocationManager *manager) {
+-(void) getAccuracy: (CLLocationManager *) manager {
     if ([manager accuracyAuthorization] == CLAccuracyAuthorizationFullAccuracy) {
         NSLog(@"    [+] The application has access to location data with full accuracy");
     }
@@ -54,7 +70,7 @@ void getAccuracy(CLLocationManager *manager) {
     }
 }
 
-void getHeading(CLLocationManager *manager) {
+-(void) getHeading: (CLLocationManager *) manager {
     if ([manager headingAvailable]) {
             NSLog(@"    [+] Location manager can generate heading-related events");
         }
@@ -63,7 +79,7 @@ void getHeading(CLLocationManager *manager) {
         }
 }
 
-void getLocation(CLLocationManager *manager) {
+-(void) getLocation: (CLLocationManager *) manager {
     NSString *latitude = [@([[manager location]coordinate].latitude) stringValue];
     NSString *longitude = [@([[manager location]coordinate].longitude) stringValue];
     NSString *altitude = [@([manager location].altitude) stringValue];
@@ -127,14 +143,16 @@ void getLocation(CLLocationManager *manager) {
     
 }
 
+@end
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        CLLocationManager *locMan = [[CLLocationManager alloc]init];
-        BOOL authed = checkAuth(locMan);
+        LocationService *locMan = [[LocationService alloc]init];
+        BOOL authed = [locMan checkAuth: locMan.locationManager];
         if (authed) {
-            getAccuracy(locMan);
-            getHeading(locMan);
-            getLocation(locMan);
+            [locMan getAccuracy: locMan.locationManager];
+            [locMan getHeading: locMan.locationManager];
+            [locMan getLocation: locMan.locationManager];
         }
         
     return 0;

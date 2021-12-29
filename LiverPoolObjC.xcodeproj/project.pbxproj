@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		66A0402C276BB11D00BEF32D /* LiverPoolObjC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LiverPoolObjC; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A0402F276BB11D00BEF32D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		66ED0D9E277BC20E00DAD8DA /* liverpoolobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = liverpoolobjc.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				66A0402F276BB11D00BEF32D /* main.m */,
+				66ED0D9E277BC20E00DAD8DA /* liverpoolobjc.h */,
 			);
 			path = LiverPoolObjC;
 			sourceTree = "<group>";
